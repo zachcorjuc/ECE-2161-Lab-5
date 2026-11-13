@@ -45,16 +45,16 @@ int main() {
 			
 					break;
 
-			case 2: // Sort function A
+			case 2: // Selection Sort
 
-                    // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
+                    // First, copy the contents of the array 'data' to the working array 'wData'.
+					for (int i = 0; i < sz; i++) wData[i] = data[i];
                     
                     
 					begin_time = clock();   // start cpu timer
-			
+					SelectionSort(wData, sz);
 					// Call your Sort function A here to sort the array 'wData''
 			        //  Note that 'wData' is of size 'sz' (see case 1).
-
 
 			
 					end_time = clock();		// end cpu timer
@@ -74,13 +74,13 @@ int main() {
 			
 					break;
 
-			case 3: // Sort function B
+			case 3: // Radix Sort
 			
 			        // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
-			        
+			        for (int i = 0; i < sz; i++) wData[i] = data[i];
 			        
 					begin_time = clock();   // start cpu timer
-			
+					radixSort(wData,sz);
 					// Call your Sort function B here to sort the array 'wData'
 			        //  Note that 'wDdata' is of size 'sz' (see case 1).
 

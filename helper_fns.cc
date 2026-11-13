@@ -110,4 +110,58 @@ void	swap(long& x, long& y) {
 			return;
 }
 
+// ==== Selection Sort and Radix Sort (Nick) ====
 
+// Selection Sorting:
+// We go through array, finds minimum, and orders from low-high.
+// The element with the lowest value is selected, and exchanged with the element in the first position
+// With this method, we need to know every number in an array to discover a minimum value
+// Because scanning every number results in O(n^2) complexity
+
+void SelectionSort(long data[], long size){
+	for (long i = 0; i < size - 1; i++){ // start at pos 0, keep going until i reaches last index - 1, i++ to move to next pos.
+		long min = i;
+		for (long j = i + 1; j < size; j++){
+			if (data[j] < data[min]) min = j;
+		}
+		if (min !=i) swap(data[i], data[min]);
+	}
+}
+
+// Radix Sort:
+// We input numbers into buckets, going from ones to tens (columns). our queue is base 10(0-9)
+// We look at the last digit of each number (ones), and insert them into a queue...
+// Then, we look at the next digit(s) of each number (tens...cont.) and insert them into a queue
+		// We sort with ones, then (if needed) we sort with tens.... We determine order through each bucket place.
+void radixSort(long data[], long size){
+	if (size < 2) return;
+
+	long minVal = data[0], maxVal = data[0];
+	for (long i = 1; i < size; i++){
+		if (data[i] < minVal) minVal = data[i]; // finding the minimum value
+		if (data[i] > maxVal) maxVal = data[i]; // finding the maximum value
+	}
+	unsigned long range = (unsigned long)maxVal - (unsigned long)minVal; // we're setting our range
+
+	const int radix = 10; // creating a base of 10
+	queue<long> queues[radix]; // holding numbers 0-9
+
+	for (unsigned long factor = 1; range/ factor > 0; factor *= radix){ // factor = factor * radix
+		// controlling the column (of a digit between 0-9) that we're looking at. factor begins at 0.
+		// range / factor > 0 is a stopping mechanism so it stops running when it doesn't have any more numbers to check.
+
+		for (long j = 0; j < size; j++){ // going through the separated numbers, inserting them into "mailboxes."
+			unsigned long key = (unsigned long)data[j] - (unsigned long)minVal; // negative numbers become non-negative.
+			queues[(key / factor) % radix].push(data[j]); // isolating the exact digit for that current column
+		}
+
+		// inserting the mail back into the array, we're pulling from the queue, and writing back into the array.
+		long k = 0;
+		for (int j = 0; j < radix; j++){
+			while (!queues[j].empty()) { // keep going until the queue is empty
+				data[k++] = queues[j].front();
+				queues[j].pop();
+			}
+		}
+	}
+}
