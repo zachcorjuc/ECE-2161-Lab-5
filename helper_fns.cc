@@ -110,6 +110,15 @@ void	swap(long& x, long& y) {
 			return;
 }
 
+// ==== Insertion Sort and Merge Sort (Zach) ====
+
+//Starting from position 1, element 1's original value is stored in a temporary variable. 
+//If element 1 < element 0, element 0 is copied into element 1 and tmp is copied into element 0.
+//Positions are checked incrementally, with elements greater than element i being moved 1 spot over and
+//element i taking the empty place below them. The algorithm has O(n^2) complexity in the worst case.
+
+
+
 // ==== Selection Sort and Radix Sort (Nick) ====
 
 // Selection Sorting:
