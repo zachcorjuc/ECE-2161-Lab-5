@@ -117,7 +117,14 @@ void	swap(long& x, long& y) {
 //Positions are checked incrementally, with elements greater than element i being moved 1 spot over and
 //element i taking the empty place below them. The algorithm has O(n^2) complexity in the worst case.
 
-
+void InsertionSort(long data[], long size){
+	for(int i = 1, j; i < n; i++){
+		long temp = data[i]; //Stores element i in temporary variable
+		for(j = i; j > 0 && temp < data[j-1; j--]) 
+			data[j] = data[j-1]; //Data below i is copied 1 space over so long as greater than element i and not acccessing negative indices
+		data[j] = temp;
+	}
+}
 
 // ==== Selection Sort and Radix Sort (Nick) ====
 

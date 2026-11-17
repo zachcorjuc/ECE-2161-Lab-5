@@ -17,3 +17,6 @@ void	swap(long& x, long& y);
 // Selection sort and Radix Sort
 void SelectionSort(long data[], long size);
 void radixSort(long data[], long size);
+
+// Insertion sort and Merge Sort
+void InsertionSort(long[], long);
