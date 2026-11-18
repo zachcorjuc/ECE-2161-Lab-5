@@ -9,6 +9,7 @@
 //  ulimit -s 819200
 
 #include <iostream>
+#include <string>
 #include <ctime>
 
 #include "helper_fns.h"
@@ -17,9 +18,9 @@ using namespace std;
 
 
 int main() {
-	
 	int		choice, sz;
-	long	data[MAXSIZE], wData[MAXSIZE];
+	//long	data[MAXSIZE], wData[MAXSIZE];
+	long data[15], wData[15];
 	double  begin_time, end_time, cpu_time_used;
 	string  ifilename, ofilename;
 	
@@ -114,7 +115,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "(C)Sort ran for " << cpu_time_used << " secs.";
 
-				ofilename = "lab5_A_out.txt";
+				ofilename = "lab5_C_out.txt";
 				writefile(wData, sz, ofilename);
 
 				if (sz < 0)	 {
