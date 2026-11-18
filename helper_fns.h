@@ -27,4 +27,10 @@ void Merge(long[], long, long);
 void MergeSort(long[], long, long);
 
 
+// Comb Sort and Quicksort (CombQuickSort.cc)
+void CombSort(long data[], long n);
+void QuickSort(long data[], long n);
+void QuickSortHelper(long data[], long first, long last);
+
+
 #endif

@@ -148,7 +148,47 @@ int main() {
 				else cout << endl << "Output written to " << ofilename << endl;
 				break;
 					
-			// Write the other cases here
+			case 6: // Comb Sort
+				for (int i = 0; i < sz; i++) wData[i] = data[i];
+
+				begin_time = clock();
+				CombSort(wData, sz);
+
+				end_time = clock();
+
+				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+				cout << endl << "Comb Sort ran for " << cpu_time_used << " secs.";
+
+				ofilename = "lab5_E_out.txt";
+				if (writefile(wData, sz, ofilename) < 0)	 {
+					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+					 cerr << "       Quitting Now!" << endl << endl;
+					 return 0;
+				}
+				else cout << endl << "Output written to " << ofilename << endl;
+				break;
+
+			case 7: // Quicksort
+				for (int i = 0; i < sz; i++) wData[i] = data[i];
+
+				begin_time = clock();
+				QuickSort(wData, sz);
+
+				end_time = clock();
+
+				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+				cout << endl << "Quicksort ran for " << cpu_time_used << " secs.";
+
+				ofilename = "lab5_F_out.txt";
+				if (writefile(wData, sz, ofilename) < 0)	 {
+					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+					 cerr << "       Quitting Now!" << endl << endl;
+					 return 0;
+				}
+				else cout << endl << "Output written to " << ofilename << endl;
+				break;
+
+				// Write the other cases here
 			
 			case 0: // Exit Program
 
