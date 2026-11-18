@@ -32,5 +32,8 @@ void CombSort(long data[], long n);
 void QuickSort(long data[], long n);
 void QuickSortHelper(long data[], long first, long last);
 
+// bubble sort
+void bubbleSort(long int data[], int n);
+void shellSort(long int data[], int n);
 
 #endif
