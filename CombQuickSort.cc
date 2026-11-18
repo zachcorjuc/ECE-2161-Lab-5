@@ -1,20 +1,18 @@
 #include "helper_fns.h"
 
 // ==== Comb Sort and Quicksort ====
-// (Kept in its own file so it never overlaps with the code in helper_fns.cc)
 
-
-// Comb Sort  (Drozdek, Section 9.1.4)
-// Comb sort is an improved bubble sort. Bubble sort is slow because small
-// values near the end of the array can only move one position per pass.
-// Comb sort first compares elements that are 'step' positions apart, and
-// shrinks step by a factor of 1.3 each pass, so far-out-of-place values move
-// a long way in one swap.
-//   Phase 1: step = n/1.3, n/1.3^2, ... down to 2. Compare data[j] with
-//            data[j-step] and swap if out of order.
-//   Phase 2: finish with a bubble sort (step = 1) that stops early as soon
-//            as a pass makes no swaps.
-// Average running time is about O(n lg n); worst case is O(n^2).
+/* Comb Sort:
+Comb sort is an improved bubble sort. Bubble sort is slow because small
+values near the end of the array can only move one position per pass.
+Comb sort first compares elements that are 'step' positions apart, and
+shrinks step by a factor of 1.3 each pass, so far-out-of-place values move
+a long way in one swap.
+  Phase 1: step = n/1.3, n/1.3^2, ... down to 2. Compare data[j] with
+           data[j-step] and swap if out of order.
+  Phase 2: finish with a bubble sort (step = 1) that stops early as soon
+           as a pass makes no swaps.
+Average running time should be about O(n*log(n)); the worst case is O(n^2). */
 
 void CombSort(long data[], long n) {
 	long step = n, j, k;
@@ -41,14 +39,14 @@ void CombSort(long data[], long n) {
 }
 
 
-// Quicksort  (Drozdek, Section 9.3.3)
-// Quicksort picks a "bound" (pivot) and partitions the array so everything
-// left of the bound is <= bound and everything right of it is >= bound. The
-// bound is then in its final position, and both sides are sorted recursively.
-// The middle element is used as the bound, which avoids the O(n^2) worst case
-// on data that is already sorted. Average running time is O(n lg n).
+/* Quicksort:
+Quicksort picks a "bound" (pivot) and partitions the array so everything
+left of the bound is <= bound and everything right of it is >= bound. The
+bound is then in its final position, and both sides are sorted recursively.
+The middle element is used as the bound, which avoids the O(n^2) worst case
+on data that is already sorted. Average running time is O(n lg n).
 
-// Recursive helper: sorts data[first..last]
+Recursive helper: sorts data[first..last]*/
 void QuickSortHelper(long data[], long first, long last) {
 	long lower = first + 1, upper = last;
 
@@ -56,7 +54,7 @@ void QuickSortHelper(long data[], long first, long last) {
 	swap(data[first], data[(first + last) / 2]);
 	long bound = data[first];
 
-	// Partition: move lower right and upper left, swapping elements that are
+	// move lower right and upper left, swapping elements that are
 	// on the wrong side of the bound
 	while (lower <= upper) {
 		while (bound > data[lower]) lower++;
@@ -66,7 +64,7 @@ void QuickSortHelper(long data[], long first, long last) {
 		else lower++;
 	}
 
-	// Put the bound into its final position
+	// now the bound is in its final position
 	swap(data[upper], data[first]);
 
 	// Recursively sort the left and right subarrays
@@ -74,9 +72,9 @@ void QuickSortHelper(long data[], long first, long last) {
 	if (upper + 1 < last)  QuickSortHelper(data, upper + 1, last);
 }
 
-// Called from main: sorts data[0..n-1]
-// The largest element is moved to the end first. It acts as a "sentinel" so
-// the scan 'while (bound > data[lower]) lower++;' can never run off the end.
+/* sorts data[0..n-1]
+The largest element is moved to the end first. It acts as a "sentinel" so
+the scan 'while (bound > data[lower]) lower++;' can never run off the end.*/
 void QuickSort(long data[], long n) {
 	long i, max;
 
