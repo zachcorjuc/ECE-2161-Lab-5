@@ -1,3 +1,6 @@
+#ifndef HELPER_FNS_H_
+#define HELPER_FNS_H_
+
 // DO NOT forget to add the prototypes for your ASort, BSort, and other functions below!
 
 #include <queue> // Radix sort header
@@ -20,3 +23,5 @@ void radixSort(long data[], long size);
 
 // Insertion sort and Merge Sort
 void InsertionSort(long[], long);
+
+#endif

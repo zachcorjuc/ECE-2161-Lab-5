@@ -10,7 +10,8 @@
 
 #include <iostream>
 #include <ctime>
-#include "myheaders.h"
+
+#include "helper_fns.h"
 
 using namespace std;
 
@@ -23,7 +24,6 @@ int main() {
 	string  ifilename, ofilename;
 	
 	while (1) {
-
 		printmenu();
 		cin >> choice;
 		
@@ -33,7 +33,7 @@ int main() {
                     // The function 'readfile' returns the size of the file that was read
 					// If the file could not be read, 'readfile' returns -1
 				
-					ifilename = "lab5_input.txt";
+					ifilename = "test_input.txt"; //"lab5_input.txt"
 					sz = readfile(ifilename, data);
 			
 					if (sz < 0)	 {
@@ -102,8 +102,30 @@ int main() {
 					else cout << endl << "Output written to " << ofilename << endl;
 			
 					break;
+
+			case 4:
+				for (int i = 0; i < sz; i++) wData[i] = data[i];
+
+				begin_time = clock();
+				InsertionSort(wData, sz);
+
+				end_time = clock();
+
+				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+				cout << endl << "(C)Sort ran for " << cpu_time_used << " secs.";
+
+				ofilename = "lab5_A_out.txt";
+				writefile(wData, sz, ofilename);
+
+				if (sz < 0)	 {
+					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+					 cerr << "       Quitting Now!" << endl << endl;
+					 return 0;
+				}
+				else cout << endl << "Output written to " << ofilename << endl;
+				break;
 					
-			// Write the other cases 4 - 7 here		
+			// Write the other cases here
 			
 			case 0: // Exit Program
 
@@ -121,4 +143,3 @@ int main() {
 	
 	return 0;
 }
-
