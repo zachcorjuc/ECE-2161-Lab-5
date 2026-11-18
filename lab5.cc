@@ -113,9 +113,31 @@ int main() {
 				end_time = clock();
 
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
-				cout << endl << "(C)Sort ran for " << cpu_time_used << " secs.";
+				cout << endl << "Insertion Sort ran for " << cpu_time_used << " secs.";
 
-				ofilename = "lab5_C_out.txt";
+				ofilename = "InsertionSortResults.txt";
+				writefile(wData, sz, ofilename);
+
+				if (sz < 0)	 {
+					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+					 cerr << "       Quitting Now!" << endl << endl;
+					 return 0;
+				}
+				else cout << endl << "Output written to " << ofilename << endl;
+				break;
+
+			case 5:
+				for (int i = 0; i < sz; i++) wData[i] = data[i];
+
+				begin_time = clock();
+				MergeSort(wData, 0, sz-1); //Instead of taking size argument, takes start and end indices
+
+				end_time = clock();
+
+				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+				cout << endl << "MergeSort ran for " << cpu_time_used << " secs.";
+
+				ofilename = "MergeSortResults.txt";
 				writefile(wData, sz, ofilename);
 
 				if (sz < 0)	 {

@@ -13,10 +13,10 @@ void	printmenu() {
 			cout << endl;
 			cout << "Please choose from the following menu:" << endl;
 			cout << "  1: Read input file" << endl;
-			cout << "  2: Sort using Asort" << endl;
-			cout << "  3: Sort using Bsort" << endl;
-			cout << "  4: Sort using Csort" << endl;
-			cout << "  5: Sort using Dsort" << endl;			
+			cout << "  2: Sort using Selection Sort" << endl;
+			cout << "  3: Sort using Radix Sort" << endl;
+			cout << "  4: Sort using Insertion Sort" << endl;
+			cout << "  5: Sort using Merge Sort" << endl;
 			cout << "  6: Sort using Esort" << endl;
 			cout << "  7: Sort using Fsort" << endl;			
 			cout << "  0: Exit program" << endl;
@@ -113,6 +113,7 @@ void	swap(long& x, long& y) {
 
 // ==== Insertion Sort and Merge Sort (Zach) ====
 
+//Insert Sort
 //Starting from position 1, element 1's original value is stored in a temporary variable. 
 //If element 1 < element 0, element 0 is copied into element 1 and tmp is copied into element 0.
 //Positions are checked incrementally, with elements greater than element i being moved 1 spot over and
@@ -127,20 +128,37 @@ void InsertionSort(long data[], long size){
 	}
 }
 
+//Mergesort
 //<Add mergesort description later 	<TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO>>
 
 //Merge algorithm
 void Merge(long data[], long first, long last){
 	long mid = (first + last) / 2;
 	long i1 = 0, i2 = first, i3 = mid + 1;
+	long span = last-first+1;
 
-	long *temp = new long[last+1];
+	long *temp = new long[span];
 
 	while(i2<i3&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
-		//Finish writing!!!
+		if(data[i2] < data[i3]) temp[i1++] = data[i2++];
+		else temp[i1++] = data[i3++];
 	}
 
-	//TO DO: Deallocate memory
+	//Empties rest of the non-empty half into the temporary array
+	if(i2>=i3){ //Right sub-array isn't emptied
+		while(i1<span){
+			temp[i1++] = data[i3++];
+		}
+	}
+	else { //Left sub-array isn't emptied
+		while(i1<span){
+			temp[i1++] = data[i2++];
+		}
+	}
+
+	for(i1 = 0, i2 = first; i1<span; ++i1, ++i2) data[i2] = temp[i1]; //Loads temporary array into
+
+	delete[] temp;
 }
 
 //MergeSort algorithm
