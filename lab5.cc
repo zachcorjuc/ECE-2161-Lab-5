@@ -20,7 +20,7 @@ using namespace std;
 int main() {
 	int		choice, sz;
 	//long	data[MAXSIZE], wData[MAXSIZE];
-	long data[15], wData[15];
+	long data[23], wData[23];
 	double  begin_time, end_time, cpu_time_used;
 	string  ifilename, ofilename;
 	

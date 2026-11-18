@@ -62,7 +62,8 @@ int		readfile(string infilename, long d[]) {
 					infile >> d[i];
 				} // for
 				
-				size = i-1; // eof() causes an extra (invalid) number to be read
+				//size = i-1; // eof() causes an extra (invalid) number to be read
+				size = i;
 				infile.close();
 			} // else
 	
@@ -139,13 +140,13 @@ void Merge(long data[], long first, long last){
 
 	long *temp = new long[span];
 
-	while(i2<i3&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
+	while(i2<mid+1&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
 		if(data[i2] < data[i3]) temp[i1++] = data[i2++];
 		else temp[i1++] = data[i3++];
 	}
 
 	//Empties rest of the non-empty half into the temporary array
-	if(i2>=i3){ //Right sub-array isn't emptied
+	if(i2>=mid+1){ //Right sub-array isn't emptied
 		while(i1<span){
 			temp[i1++] = data[i3++];
 		}
