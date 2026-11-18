@@ -127,6 +127,34 @@ void InsertionSort(long data[], long size){
 	}
 }
 
+//<Add mergesort description later 	<TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO>>
+
+//Merge algorithm
+void Merge(long data[], long first, long last){
+	long mid = (first + last) / 2;
+	long i1 = 0, i2 = first, i3 = mid + 1;
+
+	long *temp = new long[last+1];
+
+	while(i2<i3&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
+		//Finish writing!!!
+	}
+
+	//TO DO: Deallocate memory
+}
+
+//MergeSort algorithm
+void MergeSort(long data[], long first, long last){
+	if(first < last){ //Array of 1 is already sorted
+		long mid = (first + last) / 2;
+
+		MergeSort(data, first, mid); //Left merge-sort
+		MergeSort(data, mid+1, last); //Right merge-srt
+
+		Merge(data, first, last); //Merges sorted halves
+	}
+}
+
 // ==== Selection Sort and Radix Sort (Nick) ====
 
 // Selection Sorting:

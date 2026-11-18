@@ -23,5 +23,8 @@ void radixSort(long data[], long size);
 
 // Insertion sort and Merge Sort
 void InsertionSort(long[], long);
+void Merge(long[], long, long);
+void MergeSort(long[], long, long);
+
 
 #endif
