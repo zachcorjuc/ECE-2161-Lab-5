@@ -19,8 +19,7 @@ using namespace std;
 
 int main() {
 	int		choice, sz;
-	//long	data[MAXSIZE], wData[MAXSIZE];
-	long data[23], wData[23];
+	long	data[MAXSIZE], wData[MAXSIZE];
 	double  begin_time, end_time, cpu_time_used;
 	string  ifilename, ofilename;
 	
@@ -35,7 +34,7 @@ int main() {
                         // The function 'readfile' returns the size of the file that was read
 					    // If the file could not be read, 'readfile' returns -1
 				    
-					    ifilename = "test_input.txt"; //"lab5_input.txt"
+					    ifilename = "lab5_input.txt"; //"test_input.txt"; 
 					    sz = readfile(ifilename, data);
 			    
 					    if (sz < 0)	 {
