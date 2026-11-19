@@ -118,7 +118,7 @@ int main() {
 				    cout << endl << "Insertion Sort ran for " << cpu_time_used << " secs." << endl;
 
 				    checkResults(wData, sz);
-				    ofilename = "lab5_Insertion_Sort_Results.txt";
+				    ofilename = "lab5_Insertion_Sort_Out.txt";
 				    writefile(wData, sz, ofilename);
 
 				    if (sz < 0)	 {
