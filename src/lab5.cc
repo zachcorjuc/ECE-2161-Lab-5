@@ -63,6 +63,7 @@ int main() {
 					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 					cout << endl << "Selection Sort ran for " << cpu_time_used << " secs.";
 			
+					checkResults(wData, sz);
 					ofilename = "lab5_Selection_Sort_out.txt";
 					writefile(wData, sz, ofilename);
 					
@@ -92,6 +93,7 @@ int main() {
 					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 					cout << endl << "Radix Sort ran for " << cpu_time_used << " secs.";
 			
+					checkResults(wData, sz);
 					ofilename = "lab5_Radix_Sort_out.txt";
 					writefile(wData, sz, ofilename);
 					
@@ -104,7 +106,7 @@ int main() {
 			
 					break;
 
-			case 4:
+			case 4: //Insertion Sort
 				for (int i = 0; i < sz; i++) wData[i] = data[i];
 
 				begin_time = clock();
@@ -115,6 +117,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Insertion Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_Insertion_Sort_Results.txt";
 				writefile(wData, sz, ofilename);
 
@@ -126,7 +129,7 @@ int main() {
 				else cout << endl << "Output written to " << ofilename << endl;
 				break;
 
-			case 5:
+			case 5: //Merge Sort
 				for (int i = 0; i < sz; i++) wData[i] = data[i];
 
 				begin_time = clock();
@@ -137,6 +140,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Merge Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_Merge_Sort_out.txt";
 				writefile(wData, sz, ofilename);
 
@@ -159,6 +163,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Comb Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_Comb_Sort_out.txt";
 				if (writefile(wData, sz, ofilename) < 0)	 {
 					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
@@ -179,6 +184,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Quick Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_Quick_Sort_out.txt";
 				if (writefile(wData, sz, ofilename) < 0)	 {
 					 cerr << endl << "ERROR: Output File could not be opened." <<endl;
@@ -205,6 +211,7 @@ int main() {
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Bubble Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_BubbleSort_out.txt";
 				writefile(wData, sz, ofilename);
 
@@ -226,12 +233,12 @@ int main() {
 				//  Note that 'wDdata' is of size 'sz' (see case 1).
 
 
-
 				end_time = clock();		// end cpu timer
 
 				cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 				cout << endl << "Shell Sort ran for " << cpu_time_used << " secs.";
 
+				checkResults(wData, sz);
 				ofilename = "lab5_Shell_Sort_out.txt";
 				writefile(wData, sz, ofilename);
 

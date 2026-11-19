@@ -114,6 +114,16 @@ void	swap(long& x, long& y) {
 			return;
 }
 
+void	checkResults(long results[], long size){
+	bool valid_results = true;
+	for(int i = 0; i<size-1&&valid_results; ++i){ //Only has to check up to element size-2
+		if(results[i]>results[i+1]) valid_results = false;
+	}
+
+	if (valid_results) cout << "Results are properly ordered! :)" << endl;
+	else cout << "Error: Results are NOT properly ordered :(" << endl;
+}
+
 // ==== Insertion Sort and Merge Sort (Zach) ====
 
 //Insert Sort
