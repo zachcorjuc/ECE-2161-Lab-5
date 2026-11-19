@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
 using namespace std;
 
@@ -58,7 +59,9 @@ int		readfile(string infilename, long d[]) {
 	
 			infile.open(infilename.c_str());
 
-			if (!infile.is_open()) { size = -1;}
+			if (!infile.is_open()) {
+				size = -1;
+			}
 			else {
 				for (i = 0; (!infile.eof()) && (i < MAXSIZE); ++i) {
 					infile >> d[i];
