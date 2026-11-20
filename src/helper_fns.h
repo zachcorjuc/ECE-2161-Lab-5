@@ -6,7 +6,7 @@
 #include <queue> // Radix sort header
 #include <string>
 #include <unistd.h>
-#define MAXSIZE	 2100000
+#define MAXSIZE	 1000000
 
 using namespace std;
 
