@@ -67,7 +67,6 @@ int		readfile(string infilename, long d[]) {
 					infile >> d[i];
 				} // for
 				
-				//size = i-1; // eof() causes an extra (invalid) number to be read
 				size = i;
 				infile.close();
 			} // else
@@ -117,78 +116,15 @@ void	swap(long& x, long& y) {
 			return;
 }
 
+//Simple function used to check if arrays are ordered
 void	checkResults(long results[], long size){
 	bool valid_results = true;
-	for(int i = 0; i<size-1&&valid_results; ++i){ //Only has to check up to element size-2
-		if(results[i]>results[i+1]) valid_results = false;
+	for(int i = 0; i<size-1&&valid_results; ++i){ //Final check is element size-2 < element size-1
+		if(results[i]>results[i+1]) valid_results = false; //Set to false if two consecutive elements are not ordered
 	}
 
 	if (valid_results) cout << "Results are properly ordered! :)" << endl;
 	else cout << "Error: Results are NOT properly ordered :(" << endl;
-}
-
-// ==== Insertion Sort and Merge Sort (Zach) ====
-
-//Insert Sort
-//Starting from position 1, element 1's original value is stored in a temporary variable. 
-//If element 1 < element 0, element 0 is copied into element 1 and tmp is copied into element 0.
-//Positions are checked incrementally, with elements greater than element i being moved 1 spot over and
-//element i taking the empty place below them. The algorithm has O(n^2) complexity in the worst case.
-
-void InsertionSort(long data[], long size){
-	for(int i = 1, j; i < size; i++){
-		long temp = data[i]; //Stores element i in temporary variable
-		for(j = i; j > 0 && temp < data[j-1]; j--) 
-			data[j] = data[j-1]; //Data below i is copied 1 space over so long as greater than element i and not acccessing negative indices
-		data[j] = temp;
-	}
-}
-
-//Mergesort
-//Recursive algorithm with worst case O(nlogn) time. Splits an n-sized array into two halves,
-//of size n/2, then each sub-array into two halves of n/4..repeats until have n
-//single-element arrays. Then, contiguous groups of 2 elements are formed by sorting
-
-//Merge algorithm
-void Merge(long data[], long first, long last){
-	long mid = (first + last) / 2;
-	long i1 = 0, i2 = first, i3 = mid + 1;
-	long span = last-first+1;
-
-	long *temp = new long[span];
-
-	while(i2<mid+1&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
-		if(data[i2] < data[i3]) temp[i1++] = data[i2++];
-		else temp[i1++] = data[i3++];
-	}
-
-	//Empties rest of the non-empty half into the temporary array
-	if(i2>=mid+1){ //Right sub-array isn't emptied
-		while(i1<span){
-			temp[i1++] = data[i3++];
-		}
-	}
-	else { //Left sub-array isn't emptied
-		while(i1<span){
-			temp[i1++] = data[i2++];
-		}
-	}
-
-	for(i1 = 0, i2 = first; i1<span; ++i1, ++i2) data[i2] = temp[i1]; //Loads temporary array into
-
-	delete[] temp;
-}
-
-//MergeSort algorithm
-void MergeSort(long data[], long first, long last){
-	if(first < last){ //Array of 1 is already sorted
-		long mid = (first + last) / 2;
-
-		MergeSort(data, first, mid); //Left merge-sort
-		MergeSort(data, mid+1, last); //Right merge-srt
-
-		Merge(data, first, last); //Merges sorted halves
-	}
 }
 
 // ==== Selection Sort and Radix Sort (Nick) ====
@@ -213,7 +149,7 @@ void SelectionSort(long data[], long size){
 // We input numbers into buckets, going from ones to tens (columns). our queue is base 10(0-9)
 // We look at the last digit of each number (ones), and insert them into a queue...
 // Then, we look at the next digit(s) of each number (tens...cont.) and insert them into a queue
-		// We sort with ones, then (if needed) we sort with tens.... We determine order through each bucket place.
+// We sort with ones, then (if needed) we sort with tens.... We determine order through each bucket place.
 void radixSort(long data[], long size){
 	if (size < 2) return;
 
@@ -247,45 +183,73 @@ void radixSort(long data[], long size){
 	}
 }
 
-//Bubble Sort:
-//<Inserti Brief Description>
+// ==== Insertion Sort and Merge Sort (Zach) ====
 
-#include "helper_fns.h"
+//Insert Sort
+//Starting from position 1, element 1's original value is stored in a temporary variable. 
+//If element 1 < element 0, element 0 is copied into element 1 and tmp is copied into element 0.
+//Positions are checked incrementally, with elements greater than element i being moved 1 spot over and
+//element i taking the empty place below them. The algorithm has O(n^2) complexity in the worst case.
 
-void bubbleSort(long int data[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = n - 1; j > i; j--) {
-            if (data[j] < data[j - 1]) {
-                long int temp = data[j];
-                data[j] = data[j - 1];
-                data[j - 1] = temp;
-            }
-        }
-    }
+void InsertionSort(long data[], long size){
+	for(int i = 1, j; i < size; i++){
+		long temp = data[i]; //Stores element i in temporary variable
+		for(j = i; j > 0 && temp < data[j-1]; j--) 
+			data[j] = data[j-1]; //Data below i is copied 1 space over so long as greater than element i and not acccessing negative indices
+		data[j] = temp;
+	}
 }
 
-//Shell Sort
-//Brief description
+//Mergesort
+//Recursive algorithm with worst case O(nlogn) time. Splits an n-sized array into two halves,
+//of size n/2, then each sub-array into two halves of n/4..repeats until have n
+//single-element arrays. Then, contiguous groups of 2 elements are formed by merging sub-arrays into
+//sorted larger array. Repeat this at each level of recursion with contiguous groups of 2 sub-arrays until
+//the original array is ordered. The algorithm has O(nlogn) complexity in the worst case.
 
-#include "helper_fns.h"
+//Merge algorithm - Helper function, merges two ordered sub-arrays into an ordered array
+void Merge(long data[], long first, long last){
+	long mid = (first + last) / 2;
+	long i1 = 0, i2 = first, i3 = mid + 1;
+	long span = last-first+1;
 
-void shellSort(long int data[], int n) {
-    for (int gap = n / 2; gap > 0; gap /= 2) {
-        for (int i = gap; i < n; i++) {
-            long int temp = data[i];
-            int j = i;
+	long *temp = new long[span];
 
-            while (j >= gap && data[j - gap] > temp) {
-                data[j] = data[j - gap];
-                j -= gap;
-            }
+	while(i2<mid+1&&i3<last+1){ //Ensures that sub-array indices remain in sub-arrays
+		if(data[i2] < data[i3]) temp[i1++] = data[i2++];
+		else temp[i1++] = data[i3++];
+	}
 
-            data[j] = temp;
-        }
-    }
+	//Empties rest of the non-empty half into the temporary array
+	if(i2>=mid+1){ //Right sub-array isn't emptied
+		while(i1<span){
+			temp[i1++] = data[i3++];
+		}
+	}
+	else { //Left sub-array isn't emptied
+		while(i1<span){
+			temp[i1++] = data[i2++];
+		}
+	}
+
+	for(i1 = 0, i2 = first; i1<span; ++i1, ++i2) data[i2] = temp[i1]; //Loads temporary array into original data
+
+	delete[] temp; //Deallocates dynamically allocated memory
 }
 
-// ==== Comb Sort and Quicksort ====
+//MergeSort algorithm - Recursive mergesort algorithm
+void MergeSort(long data[], long first, long last){
+	if(first < last){ //Array of 1 is already sorted
+		long mid = (first + last) / 2;
+
+		MergeSort(data, first, mid); //Left merge-sort
+		MergeSort(data, mid+1, last); //Right merge-srt
+
+		Merge(data, first, last); //Merges sorted halves
+	}
+}
+
+// ==== Comb Sort and Quicksort (Matt) ====
 
 /* Comb Sort:
 Comb sort is an improved bubble sort. Bubble sort is slow because small
@@ -370,4 +334,47 @@ void QuickSort(long data[], long n) {
 
 	swap(data[n - 1], data[max]);             // largest is now in final spot
 	QuickSortHelper(data, 0, n - 2);          // sort everything else
+}
+
+// ==== Bubble Sort and Shell Sort (Nadia) ====
+
+//Bubble Sort:
+//Array is scanned from top to bottom, and two elements are swapped if found to be out of order
+//with each other. This starts by comparing the two elements n-1 and n-2 and decrementing each element
+//from there, which bubbles the smallest element to the beginning of the array. This repeats, with each pass
+//comparing 1 less pair than the last (as the lowest elements from previous passes must already be in order).
+//The worst-case complexity is O(n^2)
+
+void bubbleSort(long int data[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = n - 1; j > i; j--) {
+            if (data[j] < data[j - 1]) {
+                long int temp = data[j];
+                data[j] = data[j - 1];
+                data[j - 1] = temp;
+            }
+        }
+    }
+}
+
+//Shell Sort
+//Idea is to split array into smaller arrays for sorting, which are then sorted into the final array.
+//Does this by comparing elements with increments of equally wide gaps, then elements with increments of
+//equally short gaps. There is no proof for the best choice of these gaps. The worst case depends on the gap
+//chosen, but it is ultimately more efficient than insertion sort as better complexity than O(n^2).
+
+void shellSort(long int data[], int n) {
+    for (int gap = n / 2; gap > 0; gap /= 2) {
+        for (int i = gap; i < n; i++) {
+            long int temp = data[i];
+            int j = i;
+
+            while (j >= gap && data[j - gap] > temp) {
+                data[j] = data[j - gap];
+                j -= gap;
+            }
+
+            data[j] = temp;
+        }
+    }
 }

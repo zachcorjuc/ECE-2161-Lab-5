@@ -6,14 +6,14 @@
 #include <queue> // Radix sort header
 #include <string>
 #include <unistd.h>
-#define MAXSIZE	 1000000
+#define MAXSIZE	 2100000
 
 using namespace std;
 
 void	printmenu();
 void	printarray(long data[], long size);
-int		readfile(string infilename, long data[]);
-int		writefile(long data[], long size, string outfilename);
+int	readfile(string infilename, long data[]);
+int	writefile(long data[], long size, string outfilename);
 void	swap(long& x, long& y);
 void	checkResults(long[], long);
 
@@ -28,7 +28,7 @@ void Merge(long[], long, long);
 void MergeSort(long[], long, long);
 
 
-// Comb Sort and Quicksort (CombQuickSort.cc)
+// Comb Sort and Quicksort
 void CombSort(long data[], long n);
 void QuickSort(long data[], long n);
 void QuickSortHelper(long data[], long first, long last);
